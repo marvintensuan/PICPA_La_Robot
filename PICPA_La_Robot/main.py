@@ -27,7 +27,11 @@ if __name__ == '__main__':
 
             footer = body.find('Unsubscribe')
             body = body[0:footer]
-        break
+
+            contents.append(
+                f'****\n{subject}\n***\n{body}'
+            )
+
 
     # Reddit
 
@@ -39,6 +43,8 @@ if __name__ == '__main__':
             f"{last_week.strftime('%b %d')} to {end_date.strftime('%b %d')}.\n" \
             'You can register in these events at the' \
             '[PICPA GlueUp page](https://picpa.glueup.com/my/home/)'
+
+        POST_BODY = POST_BODY + '---\n'.join(contents)
 
         reddit = Reddit('PICPA_La_Robot', user_agent='script/PICPA_La_Robot')
         submit_body = reddit.subreddit('testingground4bots').submit(POST_TITLE, POST_BODY)
