@@ -14,8 +14,12 @@ class OutlookInboxFolder:
                 for item in self.folder.Items.Restrict(str_filter):
                     msg = dict.fromkeys([item.Subject])
                     body = item.body
+
+                    # Remove links
                     if not self.show_body_links:
                         body = self.hide_links(body, replacement=link_replacement)
+
+                    # Add to return value
                     msg[item.Subject] = body
                     folder_items.append(msg)
         except Exception as e:
