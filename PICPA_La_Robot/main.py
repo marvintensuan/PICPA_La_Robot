@@ -46,6 +46,9 @@ if __name__ == '__main__':
 
         POST_BODY = POST_BODY + '---\n'.join(contents)
 
+        POST_BODY = POST_BODY \
+            + '^(I am a bot in alpha.)'
+
         reddit = Reddit('PICPA_La_Robot', user_agent='script/PICPA_La_Robot')
         submit_body = reddit.subreddit('testingground4bots').submit(POST_TITLE, POST_BODY)
     else:
