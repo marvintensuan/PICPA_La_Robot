@@ -17,11 +17,16 @@ if __name__ == '__main__':
         f"[ReceivedTime] >= '{last_week.strftime('%m/%d/%Y %H:%M %p')}'"
     )
 
+    contents = []
     for items in current_mail_items:
         for subject, body in items.items():
             body = body.replace("If you can't see this email click here.", '')
             body = body.replace('\t', "&#9;")
             body = body.replace('\r', '')
+            body = body.replace('Marvin', 'Redditor')
+
+            footer = body.find('Unsubscribe')
+            body = body[0:footer]
         break
 
     # Reddit
