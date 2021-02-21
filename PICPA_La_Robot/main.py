@@ -21,7 +21,7 @@ if __name__ == '__main__':
     for items in current_mail_items:
         for subject, body in items.items():
             body = body.replace("If you can't see this email click here.", '')
-            body = body.replace('\t', "&#9;")
+            body = body.replace('\t', "&emsp;")
             body = body.replace('\r', '')
             body = body.replace('Marvin', 'Redditor')
 
