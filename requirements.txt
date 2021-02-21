@@ -1,0 +1,2 @@
+praw
+pywin32
