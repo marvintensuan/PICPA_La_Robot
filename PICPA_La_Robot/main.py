@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     
     end_date = datetime.now().date()
-    last_week = end_date - timedelta()
+    last_week = end_date - timedelta(days=7)
 
     current_mail_items = PICPA.folder_restrict(
         f"[ReceivedTime] >= '{last_week.strftime('%m/%d/%Y %H:%M %p')}'"
@@ -30,6 +30,10 @@ if __name__ == '__main__':
 
     if continue_to_post.lower() in ['y', 'yes']:
         POST_TITLE = f'This is PICPA for the week ending {end_date.strftime()}'
+        POST_BODY = '# PICPA WEEKLY \nThese are summary of new PICPA Events from' \
+            f"{last_week.strftime('%b %d')} to {end_date.strftime('%b %d')}.\n" \
+            'You can register in these events at the' \
+            '[PICPA GlueUp page](https://picpa.glueup.com/my/home/)'
 
         reddit = Reddit('PICPA_La_Robot', user_agent='script/PICPA_La_Robot')
         submit_body = reddit.subreddit('testingground4bots').submit(POST_TITLE, POST_BODY)
