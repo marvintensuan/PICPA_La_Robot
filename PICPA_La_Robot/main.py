@@ -48,7 +48,11 @@ if __name__ == '__main__':
 
         POST_BODY = POST_BODY \
             + '\n---\n^(I am a bot in alpha.)'
-        reddit = Reddit('PICPA_La_Robot', user_agent='script/PICPA_La_Robot')
-        submit_body = reddit.subreddit('testingground4bots').submit(POST_TITLE, POST_BODY)
+        
+        try:
+            reddit = Reddit('PICPA_La_Robot', user_agent='script/PICPA_La_Robot')
+            submit_body = reddit.subreddit('testingground4bots').submit(POST_TITLE, POST_BODY)
+        except Exception as e:
+            print(e)
     else:
         print('I will take that as a NO.')
