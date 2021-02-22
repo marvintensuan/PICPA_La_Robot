@@ -27,17 +27,32 @@ if __name__ == '__main__':
             body = body.replace('When', '')
             body = body.replace('&emsp;\n', '\n\n')
             body = body.replace('\n  \n', '')
-            body = body.replace('\n  &emsp;', '')
-            body = body.replace('\n&emsp;\n', '\n\n')
-
+            body = body.replace('\n  &emsp;', '\n\n')
+            body = body.replace('\nSPEAKER', ' | **SPEAKER**')
+            body = body.replace('Speakers', '## Speakers')
+            body = body.replace('      I Will Attend     \n', '' )
+            body = body.replace('\n      No     ', '' )
 
             footer = body.find('Unsubscribe')
             body = body[0:footer]
+
+            speakers = body.find('Speakers')
+            body_speakers = body[speakers:]
+            body = body[0:speakers]
+
+            body_speakers = body_speakers.split('\n')
+            body_speakers = '\n\n'.join(body_speakers)
+
+            body = body + body_speakers
+
             decor = '¤' * min(50, len(subject)) + '\n'
 
             contents.append(
-                f"{decor}\n{subject}\n\n{decor}\n{body}"
+                f"{decor}\n## {subject}\n\n{decor}\n{body}"
             )
+
+            print(body)
+        break
 
     # Reddit
     continue_to_post = input('Done getting data from Outlook. Should we continue?\n')
