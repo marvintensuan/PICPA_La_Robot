@@ -30,7 +30,7 @@ if __name__ == '__main__':
             decor = '¤' * min(50, len(subject)) + '\n'
 
             contents.append(
-                f"{decor}\n{subject}\n{decor}\n{body}"
+                f"{decor}\n{subject}\n\n{decor}\n{body}"
             )
 
 
