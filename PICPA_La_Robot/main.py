@@ -4,6 +4,7 @@ from praw import Reddit
 from praw.models import Submission
 
 from helper_outlook import OutlookInboxFolder
+from helper_string import chain_replace
 
 if __name__ == '__main__':
     PICPA = OutlookInboxFolder('PICPA')
@@ -19,19 +20,24 @@ if __name__ == '__main__':
     contents = []
     for items in current_mail_items:
         for subject, body in items.items():
-            body = body.replace("If you can't see this email click here.", '')
-            body = body.replace('\t', "&emsp;")
-            body = body.replace('\r', '')
-            body = body.replace('Marvin', 'Redditor')
-            body = body.replace('Share this event', '')
-            body = body.replace('When', '')
-            body = body.replace('&emsp;\n', '\n\n')
-            body = body.replace('\n  \n', '')
-            body = body.replace('\n  &emsp;', '\n\n')
-            body = body.replace('\nSPEAKER', ' | **SPEAKER**')
-            body = body.replace('Speakers', '## Speakers')
-            body = body.replace('      I Will Attend     \n', '' )
-            body = body.replace('\n      No     ', '' )
+
+            for_replacement = {
+                "If you can't see this email click here.": '',
+                '\t' : "&emsp;",
+                '\r' : '',
+                'Marvin' : 'Redditor',
+                'Share this event' : '',
+                'When' : '',
+                '&emsp;\n' : '\n\n',
+                '\n  \n' : '',
+                '\n  &emsp;' : '\n\n',
+                '\nSPEAKER' : ' | **SPEAKER**',
+                'Speakers' : '## Speakers',
+                '      I Will Attend     \n' : '' ,
+                '\n      No     ' : '' ,
+            }
+
+            body = chain_replace(body, replace=for_replacement)
 
             footer = body.find('Unsubscribe')
             body = body[0:footer]
@@ -50,9 +56,6 @@ if __name__ == '__main__':
             contents.append(
                 f"{decor}\n## {subject}\n\n{decor}\n{body}"
             )
-
-            print(body)
-        break
 
     # Reddit
     continue_to_post = input('Done getting data from Outlook. Should we continue?\n')
