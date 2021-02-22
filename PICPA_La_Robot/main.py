@@ -35,6 +35,8 @@ if __name__ == '__main__':
                 'Speakers' : '## Speakers',
                 '      I Will Attend     \n' : '' ,
                 '\n      No     ' : '' ,
+                'Register Now': '',
+                'Register' : '',
             }
 
             body = chain_replace(body, replace=for_replacement)
@@ -51,7 +53,7 @@ if __name__ == '__main__':
 
             body = body + body_speakers
 
-            decor = '¤' * min(50, len(subject)) + '\n'
+            decor = '¤' * min(48, len(subject)) + '\n'
 
             contents.append(
                 f"{decor}\n## {subject}\n\n{decor}\n{body}"
@@ -64,17 +66,18 @@ if __name__ == '__main__':
         POST_TITLE = f"This is PICPA for the week ending {end_date.strftime('%B %d, %Y')}"
         POST_BODY = '# PICPA WEEKLY \nThese are summary of new PICPA Events from ' \
             f"{last_week.strftime('%b %d')} to {end_date.strftime('%b %d')}.\n" \
-            'You can register in these events at the ' \
-            '[PICPA GlueUp page](https://picpa.glueup.com/).\n\n'
+            'You can register for these events at the ' \
+            '[PICPA GlueUp website](https://picpa.glueup.com/).\n\n'
 
         POST_BODY = POST_BODY + '\n---\n'.join(contents)
 
         POST_BODY = POST_BODY \
-            + '\n---\n^(I am a bot in alpha.)'
+            + '\n---\n^(I am a bot in alpha. For concerns, contact ' \
+            + '[tagapagtuos](https://www.reddit.com/user/tagapagtuos).)'
         
         try:
             reddit = Reddit('PICPA_La_Robot', user_agent='script/PICPA_La_Robot')
-            submit_body = reddit.subreddit('testingground4bots').submit(POST_TITLE, POST_BODY)
+            submit_body = reddit.subreddit('AccountingPH').submit(POST_TITLE, POST_BODY)
         except Exception as e:
             print(e)
     else:
