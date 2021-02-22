@@ -24,6 +24,12 @@ if __name__ == '__main__':
             body = body.replace('\r', '')
             body = body.replace('Marvin', 'Redditor')
             body = body.replace('Share this event', '')
+            body = body.replace('When', '')
+            body = body.replace('&emsp;\n', '\n\n')
+            body = body.replace('\n  \n', '')
+            body = body.replace('\n  &emsp;', '')
+            body = body.replace('\n&emsp;\n', '\n\n')
+
 
             footer = body.find('Unsubscribe')
             body = body[0:footer]
@@ -33,7 +39,6 @@ if __name__ == '__main__':
                 f"{decor}\n{subject}\n\n{decor}\n{body}"
             )
 
-
     # Reddit
     continue_to_post = input('Done getting data from Outlook. Should we continue?\n')
 
@@ -42,7 +47,7 @@ if __name__ == '__main__':
         POST_BODY = '# PICPA WEEKLY \nThese are summary of new PICPA Events from ' \
             f"{last_week.strftime('%b %d')} to {end_date.strftime('%b %d')}.\n" \
             'You can register in these events at the ' \
-            '[PICPA GlueUp page](https://picpa.glueup.com/my/home/).\n'
+            '[PICPA GlueUp page](https://picpa.glueup.com/).\n\n'
 
         POST_BODY = POST_BODY + '\n---\n'.join(contents)
 
