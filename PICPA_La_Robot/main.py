@@ -23,7 +23,7 @@ if __name__ == '__main__':
             body = body.replace('\t', "&emsp;")
             body = body.replace('\r', '')
             body = body.replace('Marvin', 'Redditor')
-            body = body.replace('')
+            body = body.replace('Share this event', '')
 
             footer = body.find('Unsubscribe')
             body = body[0:footer]
