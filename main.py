@@ -16,7 +16,6 @@ if __name__ == '__main__':
     contents = []
     for items in current_mail_items:
         for subject, body in items.items():
-
             for_replacement = {
                 "If you can't see this email click here.": '',
                 '\t' : "&emsp;",
@@ -33,9 +32,11 @@ if __name__ == '__main__':
                 '\n      No     ' : '' ,
                 'Register Now': '',
                 'Register' : '',
+                '    Learn more' : ''
             }
 
             body = Bot.chain_replace(body, replace=for_replacement)
+            body = body.strip()
 
             footer = body.find('Unsubscribe')
             body = body[0:footer]
@@ -56,6 +57,18 @@ if __name__ == '__main__':
             )
 
     contents = [cont + '\n---\n' for cont in contents]
+
+    CHAR_LIMIT = 30000
+    char_len_count = 0
+
+    for n, item in enumerate(contents):
+        char_len_count += len(item)
+        if char_len_count >= CHAR_LIMIT:
+            slicer = n
+            break
+
+    comments = contents[slicer:]
+    contents = contents[0:slicer]
 
     continue_to_post = input('Done getting data from Outlook. Should we continue?\n')
 
