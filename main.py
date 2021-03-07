@@ -10,7 +10,7 @@ if __name__ == '__main__':
     last_week = end_date - timedelta(days=7)
 
     current_mail_items = inbox.folder_restrict(
-        f"[ReceivedTime] >= '{last_week.strftime('%m/%d/%Y %H:%M %p')}'"
+        f"[ReceivedTime] >= '{last_week.strftime('%m/%b/%Y %H:%M %p')}'"
     )
 
     contents = []
