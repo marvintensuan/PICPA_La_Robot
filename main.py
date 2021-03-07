@@ -60,15 +60,15 @@ if __name__ == '__main__':
 
     CHAR_LIMIT = 30000
     char_len_count = 0
+    comments = []
 
     for n, item in enumerate(contents):
         char_len_count += len(item)
         if char_len_count >= CHAR_LIMIT:
             slicer = n
+            comments = contents[slicer:]
+            contents = contents[0:slicer]
             break
-
-    comments = contents[slicer:]
-    contents = contents[0:slicer]
 
     continue_to_post = input('Done getting data from Outlook. Should we continue?\n')
 
@@ -85,10 +85,13 @@ if __name__ == '__main__':
 
             reddit.append_body(contents)
             
-            reddit.append_body('\n---\n^(I am a bot in alpha. For concerns, contact', end=' ')
+            reddit.append_body('^(I am a bot in alpha. For concerns, contact', end=' ')
             reddit.extend_body_last('[tagapagtuos](https://www.reddit.com/user/tagapagtuos).)')
 
             reddit.post('testingground4bots')
+
+            for item in comments:
+                reddit.comment_on_post(item)
         except Exception as e:
             print(e)
     else:

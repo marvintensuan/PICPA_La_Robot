@@ -29,3 +29,7 @@ class RedditInstance():
 
     def post(self, subreddit):
         self.Reddit.subreddit(subreddit).submit(self.post_title, self.body)
+
+    def comment_on_post(self, comment):
+        for post in self.Reddit.redditor(self.site_name).submissions.new(limit=1):
+            post.reply(comment)
