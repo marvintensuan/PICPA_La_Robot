@@ -30,6 +30,9 @@ class RedditInstance():
     def post(self, subreddit):
         self.Reddit.subreddit(subreddit).submit(self.post_title, self.body)
 
+    @property
+    def latest_post(self):
+        return self.Reddit.redditor(self.site_name).submissions.new(limit=1)
+    
     def comment_on_post(self, comment):
-        for post in self.Reddit.redditor(self.site_name).submissions.new(limit=1):
-            post.reply(comment)
+        self.latest_post.reply(comment)
