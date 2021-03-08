@@ -88,7 +88,7 @@ if __name__ == '__main__':
             reddit.append_body('^(I am a bot in alpha. For concerns, contact', end=' ')
             reddit.extend_body_last('[tagapagtuos](https://www.reddit.com/user/tagapagtuos).)')
 
-            reddit.post('testingground4bots')
+            reddit.post('AccountingPH')
 
             for item in comments:
                 reddit.comment_on_post(item)
