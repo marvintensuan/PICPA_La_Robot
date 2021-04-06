@@ -10,8 +10,11 @@ if __name__ == '__main__':
     last_week = end_date - timedelta(days=7)
 
     current_mail_items = inbox.folder_restrict(
-        f"[ReceivedTime] >= '{last_week.strftime('%m/%b/%Y %H:%M %p')}'"
+        f"[ReceivedTime] >= '{last_week.strftime('%m/%d/%Y %H:%M %p')}'"
     )
+
+    print('Getting Outlook items from', end=' ')
+    print(f"{last_week.strftime('%b/%d/%Y')} to {end_date.strftime('%b/%d/%Y')}")
 
     contents = []
     for items in current_mail_items:
